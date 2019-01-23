@@ -5,5 +5,6 @@ public class HangMan {
 
 	System.out.println("HEJ");
 	System.out.println("HEJ");
+	System.out.println("HEJ");
 	}
 }
