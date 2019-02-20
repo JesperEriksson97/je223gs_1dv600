@@ -1,7 +1,7 @@
 
-public class Game extends Print {
-	
-	private char yesOrNo = 'n';
+public class Game {
+	Print print = new Print();
+	private boolean yesOrNo = false;
 	private String nickname = "Player unknown";
 	
 	public Game () {
@@ -12,7 +12,9 @@ public class Game extends Print {
 	 * Start game calls printStartMenu, which prints the starting menu.
 	 */
 	
-	private void startGame () {}
+	public void startGame () {
+		print.printStartMenu();
+	}
 	
 	/**
 	 * Ends the game.
@@ -25,7 +27,6 @@ public class Game extends Print {
 	 * @return boolean value 
 	 */
 	
-	private boolean checkAnswer (Character letter) {return false;}
 	
 	/**
 	 * Setter for the player username.
