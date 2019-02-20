@@ -1,6 +1,16 @@
 
+/**
+ * Is made to start a new session of the game.
+ * @author Jesper
+ *
+ */
+
 public class Game {
 	GameSetup newGame = new GameSetup();
+	
+	/**
+	 * Constructor
+	 */
 	
 	public Game () {
 		

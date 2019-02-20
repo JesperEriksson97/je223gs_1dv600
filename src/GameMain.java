@@ -1,4 +1,10 @@
 
+/**
+ * The main class that runs the game.
+ * @author Jesper
+ *
+ */
+
 public class GameMain {
 
 /**
