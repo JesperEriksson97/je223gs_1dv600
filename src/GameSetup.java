@@ -24,13 +24,13 @@ public class GameSetup {
 	String error8 = "err8";
 	String error9 = "err9";
 	String error10 = "err10";
-	boolean victory = false;
-	int failures = 0;
-	int score = 10;
+	private boolean victory = false;
+	private int failures = 0;
+	private int score = 10;
 	StringBuilder word = new StringBuilder("");   // The word the player guess against
 	StringBuilder hiddenWord = new StringBuilder("");   // The word presented in the game, starts hidden (- - - -)
 	ArrayList<String> guessedWords = new ArrayList<String>(); // The letters that the player guessed on previously.
-	public Highscore hs = new Highscore(); 
+	private Highscore hs = new Highscore(); 
 	
 	/**
 	 * Prints the start menu.
