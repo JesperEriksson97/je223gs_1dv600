@@ -133,7 +133,7 @@ public class GameSetup {
 				printStartMenu();
 			} else if (choice.length() > 1) {
 				System.err.println("\nWrong input! Enter only 1 letter! \n"); 
-			} else if (choice.matches("^\\d+(\\.\\d+)?")) {
+			} else if (!choice.matches("[A-Za-z]{1}")) {
 				System.err.println("\nWrong input! Enter a letter(A-Z)! \n");
 			} else {
 			
