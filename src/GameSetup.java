@@ -24,6 +24,7 @@ public class GameSetup {
 	String error8 = "err8";
 	String error9 = "err9";
 	String error10 = "err10";
+	private String[] errors = {error1, error2, error3, error4, error5, error6, error7, error8, error9, error10};
 	private boolean victory = false;
 	private int failures = 0;
 	private int score = 10;
@@ -210,7 +211,7 @@ public class GameSetup {
 		// If the guess is correct set the hiddenWord character to the guess character.
 		for (int i = 0; i < wordIn.length(); i++) {
 			if (letter.charAt(0) == wordIn.charAt(i)) {
-				hiddenWord.setCharAt(i, letter.charAt(0));
+				//hiddenWord.setCharAt(i, letter.charAt(0));
 				return true;
 			}
 		}
@@ -238,4 +239,29 @@ public class GameSetup {
 		scan.close();
 		
 	}
+	
+	/**
+	 * printHangMan is supposed to print an image of a hanging man
+	 * @param failures the amount of failed guesses the player have made
+	 * @return String , the hangman in string format
+	 */
+	
+	// This is a method made for the test assignment
+	public String printHangMan (int failures) {
+		int i = failures;
+		return errors[0];
+	}
+	
+	/**
+	 * printHangMan is supposed to print an image of a hanging man
+	 * @param failures the amount of failed guesses the player have made
+	 * @return String , the hangman in string format
+	 */
+	
+	// This is the method that is going to be used
+	/*String printHangMan (int failures) {
+		int i = failures;
+		return errors[i - 1];
+	}*/
+	
 }
