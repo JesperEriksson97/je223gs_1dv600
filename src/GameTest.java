@@ -1,7 +1,7 @@
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class GameTest {
 	   // The highscore list is by default set to 0, 0, 0. Which means that if we check with anything > 0 it should go in to the highscore
 	   Highscore highscore = new Highscore();
 	   
-	   StringBuilder testWord = new StringBuilder("test");
+	   String testWord = "test";
        String testLetter = "e";
 
 	/**
@@ -77,4 +77,5 @@ public class GameTest {
 	@Test public void printHangManTest() {
 		assertEquals(gameSetUp.printHangMan(3), "err3");
 	}
+	
 }

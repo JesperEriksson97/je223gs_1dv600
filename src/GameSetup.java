@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * @class GameSetup is the class that sets up the game, making it ready to play
@@ -10,28 +12,102 @@ import java.util.Scanner;
 
 public class GameSetup {
 	
-	/**
-	 * The Strings that are supposed to represent a hanging man.
+	/*
+	  The Strings that are supposed to represent a hanging man.
 	 */
 	
-	String error1 = "err1";
-	String error2 = "err2";
-	String error3 = "err3";
-	String error4 = "err4";
-	String error5 = "err5";
-	String error6 = "err6";
-	String error7 = "err7";
-	String error8 = "err8";
-	String error9 = "err9";
-	String error10 = "err10";
+	String error1 = 
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	      |\n" +
+			"	      |\n" +
+			"	      |\n" +
+			"	      |\n" +
+			"	______|\n";
+	String error2 = 
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	  0   |\n" +
+			"	      |\n" +
+			"	      |\n" +
+			"	      |\n" +
+			"	______|\n";
+	String error3 = 
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	  0   |\n" +
+			"	  |   |\n" +
+			"	      |\n" +
+			"	      |\n" +
+			"	______|\n";
+	String error4 = 
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	  0   |\n" +
+			"	  |\\  |\n" +
+			"	      |\n" +
+			"	      |\n" +
+			"	______|\n";
+	String error5 = 
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	  0   |\n" +
+		    "	 /|\\  |\n" +
+			"	      |\n" +
+			"	      |\n" +
+			"	______|\n";
+	String error6 = 
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	  0   |\n" +
+			"	 /|\\  |\n" +
+			"	   \\  |\n" +
+			"	      |\n" +
+			"	______|\n";
+	String error7 = 
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	  0   |\n" +
+			"	 /|\\  |\n" +
+			"	 / \\  |\n" +
+			"	      |\n" +
+			"	______|\n";
+	String error8 = 
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	  0   |\n" +
+			"	 /|\\  |\n" +
+			"	_/ \\  |\n" +
+			"	      |\n" +
+			"	______|\n";
+	String error9 =
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	  0   |\n" +
+			"	 /|\\  |\n" +
+			"	_/ \\_ |\n" +
+			"	      |\n" +
+			"	______|\n";
+	String error10 = 
+			"	  -----\n" +
+			"	  |   |\n" +
+			"	  X   |\n" +
+			"	 /|\\  |\n" +
+			"	_/ \\_ |\n" +
+			"	      |\n" +
+			"	______|\n";
 	private String[] errors = {error1, error2, error3, error4, error5, error6, error7, error8, error9, error10};
+	
 	private boolean victory = false;
 	private int failures = 0;
 	private int score = 10;
-	StringBuilder word = new StringBuilder("");   // The word the player guess against
+	String word;   // The word the player guess against
+	ArrayList<String> words = new ArrayList<String>(Arrays.asList("calculator","programming","piano","church","microphone"));
+
+	 // The words to choose from
 	StringBuilder hiddenWord = new StringBuilder("");   // The word presented in the game, starts hidden (- - - -)
 	ArrayList<String> guessedWords = new ArrayList<String>(); // The letters that the player guessed on previously.
-	private Highscore hs = new Highscore(); 
+	private Highscore hs = new Highscore(); // The highscore-list.
 	
 	/**
 	 * Prints the start menu.
@@ -39,7 +115,7 @@ public class GameSetup {
 	
 	public void printStartMenu () {
 		victory = false;
-		word.setLength(0);
+		word = "";
 		hiddenWord.setLength(0);
 		guessedWords.clear();
 		failures = 0;
@@ -51,17 +127,18 @@ public class GameSetup {
 		System.out.println("|  |  |  |  /  _____  \\  |  |\\   | |  |__| | |  |  |  |  /  _____  \\  |  |\\   |");  
 		System.out.println("|__|  |__| /__/     \\__\\ |__| \\__|  \\______| |__|  |__| /__/     \\__\\ |__| \\__|"); 
 		System.out.println("\n");
-		System.out.println("1 Play Game      | press 1");
-		System.out.println("2 View Highscore | press 2");
-		System.out.println("3 Exit           | press 3");
+		System.out.println("1 Play Game      	  | press 1");
+		System.out.println("2 View Highscore 	  | press 2");
+		System.out.println("3 Exit          	  | press 3");
+		System.out.println("4 Add Custom Word     	  | press 4");
 		System.out.print("Your choice: ");
 		
 		 Scanner scanner = new Scanner(System.in);
 		 try {
 		    int choice = scanner.nextInt();
 
-		    if (choice > 3) {
-		    	System.err.println("\nWrong input! Enter a single number 1,2 or 3.\n");
+		    if (choice > 4) {
+		    	System.err.println("\nWrong input! Enter a single number 1,2,3 or 4.\n");
 		    	printStartMenu();
 		    } else {
 		    switch (choice) {
@@ -74,8 +151,11 @@ public class GameSetup {
 		        case 3:
 		        	System.exit(0);
 		            break;
-		        default:
-		            ;
+		        case 4:
+		        	System.out.println("\nEnter a word containg only letters between A-Z");
+		   		 	System.out.println("Enter 'exit' to go back to the start-menu ('exit' can therefore not be the word to be added)");
+		        	addWord();
+		        	break;
 		      }
 		    }
 		    } catch (Exception e) {
@@ -87,29 +167,43 @@ public class GameSetup {
 	}
 	
 	/**
+	 * addWord adds a custom word to the words ArrayList later to be used in the game.
+	 */
+	
+	public void addWord() {
+		 Scanner scanner = new Scanner(System.in);
+		 String word = scanner.next();
+		 if (word.length() < 1) {
+			 System.out.println("The word needs to be atleast one character long, try again");
+			 addWord();
+			 scanner.close();
+		 } else if ((!Pattern.matches("[a-zA-Z]+", word))) { // If the word contains anything but letters from A-Z do:
+			 System.out.println("The word needs to contain only letters between A-Z, try again");
+			 addWord();
+			 scanner.close();
+		 } else if (word.matches("exit")) {
+			 printStartMenu();
+		 } else {
+			 System.out.println("Your word was added! Transfering you to the start-menu");
+			 words.add(word);
+			 printStartMenu();
+			 scanner.close();
+		 }
+		 scanner.close();
+		
+	}
+
+	/**
 	 * printGame handles all the game logic.
 	 */
 	
 	private void printGame() {
 		
-		/* Creating a ArrayList<StringBuilder> and adds values to it */
-		
-		ArrayList<StringBuilder> words = new ArrayList<StringBuilder>();
-		StringBuilder str = new StringBuilder("calculator");
-		StringBuilder str1 = new StringBuilder("programming");
-		StringBuilder str2 = new StringBuilder("church");
-		StringBuilder str3 = new StringBuilder("piano");
-		StringBuilder str4 = new StringBuilder("microphone");
-		words.add(str1);
-		words.add(str2);
-		words.add(str3);
-		words.add(str4);
-		words.add(str);
-		
 		/* Grabs a random value from the ArrayList */
 		
 		Random rand = new Random();
 		int value = rand.nextInt((words.size() - 0));
+		
 		word = words.get(value);
 		System.out.println("\nGuess the word by guessing letter by letter!\nYou start at 10 points and for every wrong guess you get - 1 points\nYou can only guess on letter A-Z! Numbers and mulitple letters is not allowed");
 		System.out.println("Write 'exit' and press enter to go back to the start menu\n");
@@ -123,7 +217,8 @@ public class GameSetup {
 		/* while-loop start */
 		
 		while (failures < 10 && victory == false) {
-			System.out.println("Wrong guesses: " + failures + "\n" ); // Exchange this row to the different hangman figures!
+			String print = printHangMan(failures);
+			System.out.println(print); // Exchange this row to the different hangman figures!
 			System.out.println(hiddenWord + "\n");
 			System.out.println("Already gussed letters: " + guessedWords.toString());
 			System.out.print("Guess on a letter: ");
@@ -169,6 +264,7 @@ public class GameSetup {
 		
 		/* while end */
 		
+		// End game, either victorious or lost
 		
 		if (failures >= 10) { // Guessing wrong 10 times.
 			System.out.println("You lost... Transfering to start-menu.");
@@ -176,8 +272,8 @@ public class GameSetup {
 		} else if (victory) { // Guessing the right word.
 			int total = score - failures;
 			if (hs.checkIfHighscore(total)) {
-				System.out.println("The word was: " + word);
 				System.out.println("HOORAY! You made it! New Highscore!!");
+				System.out.println("The word was: " + word);
 				System.out.println("Your points: " + total);
 				
 				Scanner scan = new Scanner(System.in);
@@ -192,6 +288,7 @@ public class GameSetup {
 			} else {
 				
 				System.out.println("HOORAY! You made it! You almost made it into the highscore list!");
+				System.out.println("The word was: " + word);
 				System.out.println("Your points: " + total);
 			}
 		}
@@ -203,14 +300,14 @@ public class GameSetup {
 	/**
 	 * checkAnswer checks if the word in use contains the guessed letter.
 	 * @param letter the guesses letter.
-	 * @param wordIn the correct word.
+	 * @param word2 the correct word.
 	 * @return Boolean
 	 */
 	
-    public boolean checkAnswer (String letter, StringBuilder wordIn) {
+    public boolean checkAnswer (String letter, String word2) {
 		// If the guess is correct set the hiddenWord character to the guess character.
-		for (int i = 0; i < wordIn.length(); i++) {
-			if (letter.charAt(0) == wordIn.charAt(i)) {
+		for (int i = 0; i < word2.length(); i++) {
+			if (letter.charAt(0) == word2.charAt(i)) {
 				//hiddenWord.setCharAt(i, letter.charAt(0));
 				return true;
 			}
@@ -246,22 +343,10 @@ public class GameSetup {
 	 * @return String , the hangman in string format
 	 */
 	
-	// This is a method made for the test assignment
+	// This is the method that is going to be used
 	public String printHangMan (int failures) {
 		int i = failures;
-		return errors[0];
+		return errors[i];
 	}
-	
-	/**
-	 * printHangMan is supposed to print an image of a hanging man
-	 * @param failures the amount of failed guesses the player have made
-	 * @return String , the hangman in string format
-	 */
-	
-	// This is the method that is going to be used
-	/*String printHangMan (int failures) {
-		int i = failures;
-		return errors[i - 1];
-	}*/
 	
 }
